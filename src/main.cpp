@@ -73,10 +73,10 @@ int main()
 		}
 
 		//process
+		warpAffine(frame, dst, W, Size(frame.cols, frame.rows));
 
 		GLuint pretex = video.texdic["tex"];
-		video.texdic["tex"] = cvMat2TexInput(frame);
-
+		video.texdic["tex"] = cvMat2TexInput(dst);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 		video.render();
