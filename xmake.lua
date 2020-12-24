@@ -1,0 +1,18 @@
+add_rules("mode.debug", "mode.release")
+add_requires("glew", "glfw", "glm", "bin2c")
+
+target("eis")
+    set_kind("binary")
+    add_files("src/*.cpp")
+	add_includedirs("inc")
+	add_linkdirs("lib")
+	add_links("opencv_world450")
+	add_packages("glew", "glfw", "glm", "bin2c")
+	set_targetdir("$(buildir)")
+	before_build(function(target)
+		
+	end)
+	after_build(function(target)
+		os.cp("$(projectdir)/prebuilt/*", "$(buildir)")
+		os.cp("$(projectdir)/shader/*", "$(buildir)")
+	end)
