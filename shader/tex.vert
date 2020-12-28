@@ -2,6 +2,8 @@
 layout(location = 0) in vec2 vert_pos;
 layout(location = 1) in vec2 tex_pos;
 
+uniform mat3 trans[10];
+
 out vec2 texPos;
 
 void main()

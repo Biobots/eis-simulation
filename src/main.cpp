@@ -16,6 +16,8 @@ GLFWwindow* window;
 
 #include <tide/common.hpp>
 
+#include <eis.hpp>
+
 using namespace std;
 using namespace cv;
 using namespace tide;
@@ -60,6 +62,8 @@ int main()
 	video.addFloatUniform("width", WIDTH);
 	video.addFloatUniform("height", HEIGHT);
 
+	Eis eis;
+
 	do
 	{
 		cam.loop();
@@ -73,10 +77,10 @@ int main()
 		}
 
 		//process
-		warpAffine(frame, dst, W, Size(frame.cols, frame.rows));
+		//warpAffine(frame, dst, W, Size(frame.cols, frame.rows));
 
 		GLuint pretex = video.texdic["tex"];
-		video.texdic["tex"] = cvMat2TexInput(dst);
+		video.texdic["tex"] = cvMat2TexInput(frame);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 		video.render();

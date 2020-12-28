@@ -54,6 +54,10 @@ namespace tide
 		{
 			glUniform1f(glGetUniformLocation(handle, name.c_str()), value); 
 		}
+		void setMat3(const std::string &name, GLsizei count, GLboolean transpose, GLfloat* value) const
+		{
+			glUniformMatrix3fv(glGetUniformLocation(handle, name.c_str()), count, transpose, value);
+		}
 		void setMat4(const std::string &name, GLsizei count, GLboolean transpose, GLfloat* value) const
 		{
 			glUniformMatrix4fv(glGetUniformLocation(handle, name.c_str()), count, transpose, value); 
