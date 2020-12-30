@@ -119,6 +119,7 @@ namespace tide
 
 		std::map<std::string, glm::vec3> vec3dic;
 		std::map<std::string, glm::mat4> mat4dic;
+		std::map<std::string, glm::mat3> mat3dic;
 		std::map<std::string, GLuint> texdic;
 		std::map<std::string, GLfloat> floatdic;
 		std::map<std::string, GLint> intdic;
@@ -163,6 +164,10 @@ namespace tide
 		void addMat4Uniform(const std::string &name, glm::mat4 value)
 		{
 			mat4dic.insert(std::pair<std::string, glm::mat4>(name, value));
+		}
+		void addMat3Uniform(const std::string &name, glm::mat3 value)
+		{
+			mat3dic.insert(std::pair<std::string, glm::mat3>(name, value));
 		}
 		void addFloatUniform(const std::string &name, GLfloat value)
 		{
@@ -218,6 +223,10 @@ namespace tide
 			for(auto v : mat4dic)
 			{
 				_shader->setMat4(v.first, 1, GL_FALSE, &v.second[0][0]);
+			}
+			for(auto v : mat3dic)
+			{
+				_shader->setMat3(v.first, 1, GL_FALSE, &v.second[0][0]);
 			}
 			for(auto v : vec3dic)
 			{
