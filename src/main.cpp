@@ -44,28 +44,17 @@ int main()
 	video.addTexture("tex", 0);
 	video.addFloatUniform("width", WIDTH);
 	video.addFloatUniform("height", HEIGHT);
-	glm::quat qPitch1 = glm::angleAxis(0.1f, glm::vec3(1, 0, 0));
-	glm::quat qYaw1 = glm::angleAxis(0.1f, glm::vec3(0, 1, 0));
-	glm::quat qRoll1 = glm::angleAxis(0.1f, glm::vec3(0, 0, 1));
-	glm::quat q = glm::normalize(qPitch1 * qYaw1 * qRoll1);
-	glm::mat3 trans1 = glm::mat3(
-			glm::vec3(1-2*q.y*q.y-2*q.z*q.z, 2*q.x*q.y-2*q.z*q.w, 2*q.x*q.z+2*q.y*q.w),
-			glm::vec3(2*q.x*q.y+2*q.z*q.w, 1-2*q.x*q.x-2*q.z*q.z, 2*q.y*q.z-2*q.x*q.w),
-			glm::vec3(2*q.x*q.z-2*q.y*q.w, 2*q.y*q.z+2*q.x*q.w, 1-2*q.x*q.x-2*q.y*q.y)
-		);
-	glm::quat qPitch2 = glm::angleAxis(1.0f, glm::vec3(1, 0, 0));
-	glm::quat qYaw2 = glm::angleAxis(1.0f, glm::vec3(0, 1, 0));
-	glm::quat qRoll2 = glm::angleAxis(0.0f, glm::vec3(0, 0, 1));
-	q = glm::normalize(qPitch2 * qYaw2 * qRoll2);
-	glm::mat3 trans2 = glm::mat3(
-			glm::vec3(1-2*q.y*q.y-2*q.z*q.z, 2*q.x*q.y-2*q.z*q.w, 2*q.x*q.z+2*q.y*q.w),
-			glm::vec3(2*q.x*q.y+2*q.z*q.w, 1-2*q.x*q.x-2*q.z*q.z, 2*q.y*q.z-2*q.x*q.w),
-			glm::vec3(2*q.x*q.z-2*q.y*q.w, 2*q.y*q.z+2*q.x*q.w, 1-2*q.x*q.x-2*q.y*q.y)
-		);
-	video.addMat3Uniform("trans1", trans1);
-	video.addMat3Uniform("trans2", trans2);
 
-	Eis eis;
+	video.addMat3Uniform("trans0", Eis::calTransform(0.099f, 0.101f, 0.101f));
+	video.addMat3Uniform("trans1", Eis::calTransform(0.100f, 0.102f, 0.102f));
+	video.addMat3Uniform("trans2", Eis::calTransform(0.101f, 0.103f, 0.103f));
+	video.addMat3Uniform("trans3", Eis::calTransform(0.102f, 0.104f, 0.104f));
+	video.addMat3Uniform("trans4", Eis::calTransform(0.103f, 0.105f, 0.105f));
+	video.addMat3Uniform("trans5", Eis::calTransform(0.104f, 0.106f, 0.106f));
+	video.addMat3Uniform("trans6", Eis::calTransform(0.105f, 0.107f, 0.107f));
+	video.addMat3Uniform("trans7", Eis::calTransform(0.106f, 0.108f, 0.108f));
+	video.addMat3Uniform("trans8", Eis::calTransform(0.107f, 0.109f, 0.109f));
+	video.addMat3Uniform("trans9", Eis::calTransform(0.108f, 0.110f, 0.110f));
 
 	do
 	{

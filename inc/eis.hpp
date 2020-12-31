@@ -46,13 +46,13 @@ public:
 		yaw = y;
 		roll = r;
 	}
-	void updateTransform()
+	void updateTransform(int index)
 	{
 		glm::quat qPitch = glm::angleAxis(pitch, glm::vec3(1, 0, 0));
 		glm::quat qYaw = glm::angleAxis(yaw, glm::vec3(0, 1, 0));
 		glm::quat qRoll = glm::angleAxis(roll, glm::vec3(0, 0, 1));
 		glm::quat q = glm::normalize(qPitch * qYaw * qRoll);
-		transforms[0] = glm::mat3(
+		transforms[index] = glm::mat3(
 			glm::vec3(1-2*q.y*q.y-2*q.z*q.z, 2*q.x*q.y-2*q.z*q.w, 2*q.x*q.z+2*q.y*q.w),
 			glm::vec3(2*q.x*q.y+2*q.z*q.w, 1-2*q.x*q.x-2*q.z*q.z, 2*q.y*q.z-2*q.x*q.w),
 			glm::vec3(2*q.x*q.z-2*q.y*q.w, 2*q.y*q.z+2*q.x*q.w, 1-2*q.x*q.x-2*q.y*q.y)
@@ -62,5 +62,18 @@ public:
 	{
 		num = sizeof(transforms)/sizeof(*transforms);
 		return transforms;
+	}
+	static glm::mat3 calTransform(float p, float y, float r)
+	{
+		glm::quat qPitch = glm::angleAxis(p, glm::vec3(1, 0, 0));
+		glm::quat qYaw = glm::angleAxis(y, glm::vec3(0, 1, 0));
+		glm::quat qRoll = glm::angleAxis(r, glm::vec3(0, 0, 1));
+		glm::quat q = glm::normalize(qPitch * qYaw * qRoll);
+		glm::mat3 transform = glm::mat3(
+			glm::vec3(1-2*q.y*q.y-2*q.z*q.z, 2*q.x*q.y-2*q.z*q.w, 2*q.x*q.z+2*q.y*q.w),
+			glm::vec3(2*q.x*q.y+2*q.z*q.w, 1-2*q.x*q.x-2*q.z*q.z, 2*q.y*q.z-2*q.x*q.w),
+			glm::vec3(2*q.x*q.z-2*q.y*q.w, 2*q.y*q.z+2*q.x*q.w, 1-2*q.x*q.x-2*q.y*q.y)
+		);
+		return transform;
 	}
 };
